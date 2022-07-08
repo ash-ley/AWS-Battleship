@@ -15,14 +15,3 @@ module "vpc" {
     Environment = "dev"
   }
 }
-
-resource "aws_vpc_endpoint" "ssm" {
-  vpc_id            = module.vpc.vpc_id
-  service_name      = "com.amazonaws.eu-west-1.ssm"
-  vpc_endpoint_type = "Interface"
-  subnet_ids        = [module.vpc.public_subnets[0]]
-
-  security_group_ids = [
-    aws_security_group.this.id
-  ]
-}
